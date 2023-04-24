@@ -1,0 +1,11 @@
+[package]
+name = "render_as_tree"
+version = "0.1.0"
+authors = ["Hazel Bachrach <bachrach.hazel@gmail.com>"]
+edition = "2021"
+license = "MIT"
+description = "Library for visualizing tree data structures via text"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
