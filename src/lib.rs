@@ -24,24 +24,23 @@
 /// # Example
 ///
 /// ```
-/// use std::collections::VecDeque;
 /// use render_as_tree::Node;
 /// struct BasicNode {
 ///     pub name: String,
-///     pub children: VecDeque<BasicNode>,
+///     pub children: Vec<BasicNode>,
 /// }
 ///
 /// impl BasicNode {
 ///     pub fn new(name: String) -> BasicNode {
 ///         BasicNode {
 ///             name,
-///             children: VecDeque::new(),
+///             children: Vec::new(),
 ///         }
 ///     }
 /// }
 ///
 /// impl Node for BasicNode {
-///     type I<'a> = std::collections::vec_deque::Iter<'a, Self>;
+///     type I<'a> = std::slice::Iter<'a, Self>;
 ///
 ///     fn name(&self) -> &str {
 ///         &self.name
@@ -117,27 +116,25 @@ pub fn render<T: Node>(node: &T) -> Vec<String> {
 
 #[cfg(test)]
 mod tests {
-    use std::collections::VecDeque;
-
     use super::*;
 
     #[derive(Debug, PartialEq)]
     struct BasicNode {
         pub name: String,
-        pub children: VecDeque<BasicNode>,
+        pub children: Vec<BasicNode>,
     }
 
     impl BasicNode {
         pub fn new(name: String) -> BasicNode {
             BasicNode {
                 name,
-                children: VecDeque::new(),
+                children: Vec::new(),
             }
         }
     }
 
     impl Node for BasicNode {
-        type I<'a> = std::collections::vec_deque::Iter<'a, Self>;
+        type I<'a> = std::slice::Iter<'a, Self>;
 
         fn name(&self) -> &str {
             &self.name
@@ -159,23 +156,23 @@ mod tests {
     fn simple_case() {
         let root = BasicNode {
             name: String::from("root - selena"),
-            children: VecDeque::from(vec![
+            children: vec![
                 BasicNode {
                     name: String::from("child 1 - sam"),
-                    children: VecDeque::from(vec![
+                    children: vec![
                         BasicNode::new(String::from("grandchild 1A - burt")),
                         BasicNode::new(String::from("grandchild 1B - crabbod")),
                         BasicNode::new(String::from("grandchild 1C - mario")),
-                    ]),
+                    ],
                 },
                 BasicNode {
                     name: String::from("child 2 - dumptruck"),
-                    children: VecDeque::from(vec![
+                    children: vec![
                         BasicNode::new(String::from("grandchild 2A - tilly")),
                         BasicNode::new(String::from("grandchild 2B - curling iron")),
-                    ]),
+                    ],
                 },
-            ]),
+            ],
         };
         assert_eq!(
             render(&root),
