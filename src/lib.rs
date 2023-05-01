@@ -40,26 +40,26 @@
 /// }
 ///
 /// impl Node for BasicNode {
-///     type I<'a> = std::slice::Iter<'a, Self>;
+///     type Iter<'a> = std::slice::Iter<'a, Self>;
 ///
 ///     fn name(&self) -> &str {
 ///         &self.name
 ///     }
-///     fn children(&self) -> Self::I<'_> {
+///     fn children(&self) -> Self::Iter<'_> {
 ///         self.children.iter()
 ///     }
 /// }
 /// ```
 pub trait Node {
     /// An iterator over the children of this node
-    type I<'a>: DoubleEndedIterator<Item = &'a Self>
+    type Iter<'a>: DoubleEndedIterator<Item = &'a Self>
     where
         Self: 'a;
 
     /// What is displayed for this node when rendered
     fn name(&self) -> &str;
     /// The immediate children of this node in the tree
-    fn children(&self) -> Self::I<'_>;
+    fn children(&self) -> Self::Iter<'_>;
 }
 
 /// Renders the given [`Node`] in a human-readable format
@@ -134,12 +134,12 @@ mod tests {
     }
 
     impl Node for BasicNode {
-        type I<'a> = std::slice::Iter<'a, Self>;
+        type Iter<'a> = std::slice::Iter<'a, Self>;
 
         fn name(&self) -> &str {
             &self.name
         }
-        fn children(&self) -> Self::I<'_> {
+        fn children(&self) -> Self::Iter<'_> {
             self.children.iter()
         }
     }
