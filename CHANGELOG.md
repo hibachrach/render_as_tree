@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/hibachrach/render_as_tree/compare/v0.2.0...v0.2.1) (2023-05-01)
+
+
+### Miscellaneous Chores
+
+* release 0.2.1 ([6d5042c](https://github.com/hibachrach/render_as_tree/commit/6d5042c14ff23b7f1611e0f41e2d384b096e5f82))
+
 ## 0.2.0 (2023-05-01)
 
 
